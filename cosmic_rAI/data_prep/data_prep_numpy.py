@@ -84,7 +84,19 @@ def split_train(events_matrix, cutoff=0.9):
     return trainset, testset
 
 
-def example():
+def get_nan_indices(mat):
+    """Given matrix, returns list of indices of events (rows) where
+    one of the charge values is NaN."""
+    charges = mat['Charges']
+    evil_indices = []
+    for idx, event in enumerate(charges):
+        if any(math.isnan(v) for k, v in event.items()):
+            evil_indices.append(idx)
+
+
+if __name__ == '__main__':
+
+    # Here is a sample usage of these functions.
 
     # load data
     mat1 = np.load('../data/sim_12360_00.npy').item()  # protons
