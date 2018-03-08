@@ -7,7 +7,7 @@ import pandas as pd
 def event_df_from_matrices(matrices, remove_nan=True):
     """Given list of matrices, creates single, multi-indexed DF
     where event-related attributes are columns, are events are rows."""
-    event_df = pd.concat(map(_event_df_from_matrix, matrices), ignore_index=True
+    event_df = pd.concat(map(_event_df_from_matrix, matrices), ignore_index=True)
     return _remove_nan_events(event_df, matrices) if remove_nan else event_df
 
 
