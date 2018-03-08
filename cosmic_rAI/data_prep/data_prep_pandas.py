@@ -7,7 +7,7 @@ import pandas as pd
 def event_df_from_matrices(matrices, remove_nan=True):
     """Given list of matrices, creates single, multi-indexed DF
     where event-related attributes are columns, are events are rows."""
-    event_df = pd.concat(map(_event_df_from_matrix, matrices))
+    event_df = pd.concat(map(_event_df_from_matrix, matrices), ignore_index=True
     return _remove_nan_events(event_df, matrices) if remove_nan else event_df
 
 
@@ -86,7 +86,7 @@ def _partition_list(lst, x_name='x', y_name='y'):
 def get_charges_by_gain(charges_df, sensor_df, gain='Low'):
     """Filter charges_df to particular gain"""
     return charges_df[
-        sensor_df.query(f'gain == "{gain}"').T.columns]
+        sensor_df.query('gain == "{}"'.format(gain)).T.columns]
 
 
 def get_log_charges(charges_df):
