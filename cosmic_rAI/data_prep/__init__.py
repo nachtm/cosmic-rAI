@@ -4,4 +4,5 @@ from .data_prep_pandas import (
     sensor_df_from_matrices,
     get_charges_by_gain,
     get_log_charges,
+    DataHelper,
 )
