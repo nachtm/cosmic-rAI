@@ -1,6 +1,7 @@
 import math
 import itertools
 from functools import reduce
+import numpy as np
 import pandas as pd
 
 
@@ -115,5 +116,4 @@ def get_charges_by_gain(charges_df, sensor_df, gain='Low'):
 
 def get_log_charges(charges_df):
     """Apply log function to every cell in charges_df, excluding 0s"""
-    return charges_df.applymap(
-        lambda x: math.log(x) if x != 0 else 0)
+    return np.log(charges_df.mask(charges_df <=0)).fillna(0)
