@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
-from .data_prep import *
+from .data_prep import get_charges_with_metadata
 
 
 def display_event(event_df, sensor_df, event, set_size_by_charges=False, def_size=10, def_alpha=0.8):
@@ -16,9 +16,10 @@ def display_event(event_df, sensor_df, event, set_size_by_charges=False, def_siz
     hgain_on = data.query('gain == "High" & charge != 0')
     lgain_on = data.query('gain == "Low" & charge != 0')
 
+    # if set_size_by_charges=True, take log of this data and "interpolate" to new range, to avoid negatives
+    # otherwise, set to defaults
     hgain_sizes = lgain_sizes = def_size
     if set_size_by_charges:
-        # take log of this data and "interpolate" to new range, to avoid negatives
         hgain_sizes = np.interp(np.log(hgain_on['charge']), (-4, 10), (10, 130))
         lgain_sizes = np.interp(np.log(lgain_on['charge']), (-4, 10), (10, 130))
 

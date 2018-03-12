@@ -5,6 +5,8 @@ import pandas as pd
 
 
 class DataHelper:
+    """Wrapper class to make it easier to interact with other functions."""
+
     def __init__(self, matrices, remove_nan=True):
         self.matrices = matrices
         self.event_df = event_df_from_matrices(matrices, remove_nan=remove_nan)
@@ -31,6 +33,8 @@ class DataHelper:
             self.event_df['charges'], self.sensor_df, use_log_charges=use_log_charges)
 
 
+# ----------------------------------------------------
+# Loading raw data
 def load_data(path):
     """Create python dict from .npy data file"""
     return np.load(path).item()
