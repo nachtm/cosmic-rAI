@@ -4,16 +4,7 @@ from .data_prep import *
 
 
 def display_event(event_df, sensor_df, event, set_size_by_charges=False, def_size=10, def_alpha=0.8):
-    """
-
-    :param event_df:
-    :param sensor_df:
-    :param event:
-    :param set_size_by_charges:
-    :param def_size:
-    :param def_alpha:
-    :return:
-    """
+    """Visualize given event using matplotlib."""
 
     # DATA PREP
     # merge sensor data wth (transposed) charge data
@@ -31,7 +22,7 @@ def display_event(event_df, sensor_df, event, set_size_by_charges=False, def_siz
         hgain_sizes = np.interp(np.log(hgain_on['charge']), (-4, 10), (10, 130))
         lgain_sizes = np.interp(np.log(lgain_on['charge']), (-4, 10), (10, 130))
 
-    # construct plot
+    # PLOT CONSTRUCTION
     fig, ax = plt.subplots(figsize=(10, 7.5))
     core_circle = plt.Circle(event_df.loc[event, 'core_MC'], radius=80, color='y', alpha=0.3)
     ax.scatter(x=hgain_off['pos_x'], y=hgain_off['pos_y'], s=def_size, c='0.7', label='hgain_off', alpha=def_alpha)
@@ -47,6 +38,7 @@ def display_event(event_df, sensor_df, event, set_size_by_charges=False, def_siz
 
 
 def display_event_sns(charges_df, sensor_df, event):
+    """Alternative style of plot generation, using Seaborn package."""
     c = get_charges_with_metadata(charges_df, sensor_df)
     data = c[['gain', 'pos_x', 'pos_y', event]].rename({event: 'charge'}, axis=1)
 
