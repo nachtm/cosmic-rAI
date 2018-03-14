@@ -1,4 +1,5 @@
 from .dnn_wrapper import (
-    one_run,
-    get_labels
+    get_labels,
+    get_flattened_labels,
+    split_and_run
 )
